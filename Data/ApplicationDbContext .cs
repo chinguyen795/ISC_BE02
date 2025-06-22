@@ -204,13 +204,13 @@ namespace ISC_BE02.Data
                 .HasForeignKey(c => c.School_ID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // CoursesLearned and TotalCoursesTaken
-            modelBuilder.Entity<CoursesLearned>()
-                .HasOne(cl => cl.TotalCourses)
-                .WithMany(tct => tct.CoursesLearned)
-                .HasForeignKey(cl => cl.TotalCourses_ID)
-                .OnDelete(DeleteBehavior.Restrict);
+            // Trong SchoolContext.cs (phương thức OnModelCreating)
 
+            modelBuilder.Entity<TotalCoursesTaken>() // Bắt đầu từ phía "nhiều" (dependent)
+                .HasOne(tct => tct.CoursesLearned) // Mỗi TotalCoursesTaken có một CoursesLearned
+                .WithMany(cl => cl.TotalCoursesTaken) // Một CoursesLearned có nhiều TotalCoursesTaken
+                .HasForeignKey(tct => tct.CoursesLearned_ID) // Khóa ngoại CoursesLearned_ID nằm trên TotalCoursesTaken
+                .OnDelete(DeleteBehavior.Restrict); // Giữ nguyên DeleteBehavior của bạn
             // CoursesLearned and SchoolYear
             modelBuilder.Entity<CoursesLearned>()
                 .HasOne(cl => cl.SchoolYear)
