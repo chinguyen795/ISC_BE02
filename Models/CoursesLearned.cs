@@ -26,5 +26,6 @@ namespace ISC_BE02.Models
         [ForeignKey("SchoolYear")]
         public int SchoolYear_ID { get; set; }
         public SchoolYear SchoolYear { get; set; }
+        public ICollection<TotalCoursesTaken> TotalCoursesTaken { get; set; } = new List<TotalCoursesTaken>();
     }
 }
