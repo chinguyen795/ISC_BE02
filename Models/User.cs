@@ -33,7 +33,7 @@ namespace ISC_BE02.Models
         public DateTime UpdateAt { get; set; }
         public ICollection<ClassHistory> ClassHistory { get; set; }
 
-        [ForeignKey("ClassHistory")]
+        [ForeignKey("CurrentClassHistory")]
         public int? History_ID { get; set; }  
         public ClassHistory CurrentClassHistory { get; set; }
 
